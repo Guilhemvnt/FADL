@@ -1,0 +1,12 @@
+
+VotingClassifier Results:
+
+              precision    recall  f1-score   support
+
+           0       0.97      0.98      0.98       354
+           1       0.95      0.91      0.93       126
+
+    accuracy                           0.96       480
+   macro avg       0.96      0.95      0.95       480
+weighted avg       0.96      0.96      0.96       480
+

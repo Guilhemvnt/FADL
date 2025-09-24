@@ -46,19 +46,22 @@ def preprocess_dataframe(df):
     df['Education_Length'] = df['Educations'].apply(len)
     df['Projects_Length'] = df['Projects'].apply(len)
 
-    for col in ['Location', 'Workplace', 'Full Name', 'Connections', 'Followers']:
-        df[col] = LabelEncoder().fit_transform(df[col].astype(str))
 
+    for col in ['Location', 'Workplace', 'Full Name' ]:
+        df[col] = LabelEncoder().fit_transform(df[col].astype(str))
+    
     count_fields = [
         'Number of Experiences', 'Number of Educations', 'Number of Licenses',
         'Number of Volunteering', 'Number of Skills', 'Number of Recommendations',
         'Number of Projects', 'Number of Publications', 'Number of Courses',
         'Number of Honors', 'Number of Scores', 'Number of Languages',
-        'Number of Organizations', 'Number of Interests', 'Number of Activities'
+        'Number of Organizations', 'Number of Interests', 'Number of Activities',
+        'Connections', 'Followers'
     ]
     df[count_fields] = df[count_fields].fillna(0)
 
     return df
+
 
 def get_feature_list():
     return [
@@ -72,6 +75,19 @@ def get_feature_list():
         'Number of Honors', 'Number of Scores', 'Number of Languages',
         'Number of Organizations', 'Number of Interests', 'Number of Activities'
     ]
+
+def get_important_feature_list():
+    return [
+        'Has_Photo', 'Has_About', 'About_Length', 'Skills_Length',
+        'Experience_Length', 'Education_Length', 'Projects_Length',
+        'Location', 'Workplace', 'Full Name', 'Connections', 'Followers',
+        'Number of Experiences', 'Number of Educations', 'Number of Licenses',
+        'Number of Volunteering', 'Number of Skills', 'Number of Recommendations',
+        'Number of Projects', 'Number of Publications', 'Number of Courses',
+        'Number of Honors', 'Number of Scores', 'Number of Languages',
+        'Number of Organizations', 'Number of Interests', 'Number of Activities'
+    ]
+
 
 def cunf_matrix(y_test, y_pred):
     cm = confusion_matrix(y_test, y_pred)
@@ -90,24 +106,22 @@ def plot_feature_importance(rf, features):
     plt.tight_layout()
     plt.show()
 
-def main():
-    path = get_dataset_path()
-    datasetname = os.path.splitext(os.path.basename(path))[0]
-    print(f"Dataset name: {datasetname}")
-
-    df = pd.read_csv(path)
+def random_forest_classifier(dataset_path, datasetname, save_model=False, features=None):
+    df = pd.read_csv(dataset_path)
     df = preprocess_dataframe(df)
     
     if 'Label' not in df.columns:
         raise ValueError("The dataset must contain a 'Label' column with 0 or 1 values.")
 
-    features = get_feature_list()
+    #print the dataset size
+
+    print(f"Dataset size: {df.shape[0]} rows, {df.shape[1]} columns")
     X = df[features]
     y = df['Label']
 
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
-    rf = RandomForestClassifier(n_estimators=100, random_state=42)
+    rf = RandomForestClassifier(n_estimators=10000, random_state=42)
     rf.fit(X_train, y_train)
 
     y_pred = rf.predict(X_test)
@@ -115,18 +129,45 @@ def main():
     print(report)
 
     timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")    
-    results_file_name = f"{timestamp}_{datasetname}_results.txt"
+    results_file_name = f"results/model_stats/{timestamp}_{datasetname}_results.txt"
 
-    with open(results_file_name, "w") as f:
-        f.write(report)
 
     plot_feature_importance(rf, features)
     cunf_matrix(y_test, y_pred)
 
-    save = input("Do you want to save the model? (y/n): ").strip().lower()
-    if save == 'y':
-        joblib.dump(rf, f"{results_file_name}.pkl")
-        print("Model saved.")
+    with open(results_file_name, "w") as f:
+        f.write(report)
+    
+    if save_model:
+        save = input("Do you want to save the model? (y/n): ").strip().lower()
+        if save == 'y':
+            joblib.dump(rf, f"{results_file_name}.pkl")
+            print("Model saved.")
+    
+
+def compare_AI_noIA_AInoAI():
+    datasets_path = ["/home/fasma/heriot-watt/Research_Methods/FADL/datasets/LinkedIn people profiles datasets - Clean_Original_label_data.csv",
+                    "/home/fasma/heriot-watt/Research_Methods/FADL/datasets/LinkedIn people profiles datasets - Clean_label_data_AI.csv",
+                    "/home/fasma/heriot-watt/Research_Methods/FADL/datasets/LinkedIn people profiles datasets - Clean_label_data_NoAI.csv"
+    ]
+
+    for path in datasets_path:
+        random_forest_classifier(path, os.path.splitext(os.path.basename(path))[0], save_model=True, features=get_feature_list())
+
+def compare_feature_importance():
+    path = "/home/fasma/heriot-watt/Research_Methods/FADL/datasets/LinkedIn people profiles datasets - Clean_Original_label_data.csv"
+    random_forest_classifier(path, os.path.splitext(os.path.basename(path))[0], save_model=True, features=get_feature_list())
+
+def main():
+    datasets_path = [#"/home/fasma/heriot-watt/Research_Methods/FADL/datasets/trainning_Datasets/LinkedIn people profiles datasets - Clean_label_data_AI.csv",
+                    #"/home/fasma/heriot-watt/Research_Methods/FADL/datasets/trainning_Datasets/LinkedIn people profiles datasets - Clean_label_data_NoAI.csv",
+                    "/home/fasma/heriot-watt/Research_Methods/FADL/datasets/trainning_Datasets/LinkedIn people profiles datasets - Clean_Original_label_data.csv",
+    ]
+
+    for path in datasets_path:
+        random_forest_classifier(path, os.path.splitext(os.path.basename(path))[0], save_model=False, features=get_feature_list())
+
+    
 
 if __name__ == "__main__":
     main()
