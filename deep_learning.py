@@ -56,7 +56,7 @@ def preprocess_dataframe(df):
         'Number of Honors', 'Number of Scores', 'Number of Languages',
         'Number of Organizations', 'Number of Interests', 'Number of Activities',
         'Connections', 'Followers'
-    ]
+    ]   
     df[count_fields] = df[count_fields].fillna(0)
     
     return df
