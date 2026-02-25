@@ -1,0 +1,11 @@
+DP
+
+Test Accuracy: 0.96
+588.8733398914337 seconds
+
+EM
+
+129.22326850891113 seconds
+
+RF
+41.29965543746948 seconds

@@ -1,0 +1,15 @@
+
+StackingClassifier Results:
+StackingClassifier CV ROC-AUC (3-fold): 0.9961
+              precision    recall  f1-score   support
+
+           0       0.98      0.96      0.97       480
+           1       0.92      0.97      0.94       240
+
+    accuracy                           0.96       720
+   macro avg       0.95      0.96      0.96       720
+weighted avg       0.96      0.96      0.96       720
+
+Saved prediction probabilities to results/model_stats/2025-11-27_03-15-52_LinkedIn people profiles datasets - Clean_Original_label_data_StackingClassifier_predictions.csv
+ROC-AUC: 0.9920
+StackingClassifier model saved to results/model_stats/2025-11-27_03-15-52_LinkedIn people profiles datasets - Clean_Original_label_data_StackingClassifier.pkl

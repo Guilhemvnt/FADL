@@ -1,0 +1,75 @@
+
+RandomForest Results:
+RandomForest CV ROC-AUC (3-fold): 0.9955
+              precision    recall  f1-score   support
+
+           0       0.98      0.96      0.97       480
+           1       0.92      0.96      0.94       240
+
+    accuracy                           0.96       720
+   macro avg       0.95      0.96      0.96       720
+weighted avg       0.96      0.96      0.96       720
+
+Saved prediction probabilities to results/model_stats/2025-09-25_18-47-30_LinkedIn people profiles datasets - Clean_Original_label_data_RandomForest_predictions.csv
+ROC-AUC: 0.9912
+RandomForest model saved to results/model_stats/2025-09-25_18-47-30_LinkedIn people profiles datasets - Clean_Original_label_data_RandomForest.pkl
+
+GradientBoosting Results:
+GradientBoosting CV ROC-AUC (3-fold): 0.9957
+              precision    recall  f1-score   support
+
+           0       0.99      0.96      0.97       480
+           1       0.92      0.98      0.95       240
+
+    accuracy                           0.96       720
+   macro avg       0.95      0.97      0.96       720
+weighted avg       0.97      0.96      0.96       720
+
+Saved prediction probabilities to results/model_stats/2025-09-25_18-47-30_LinkedIn people profiles datasets - Clean_Original_label_data_GradientBoosting_predictions.csv
+ROC-AUC: 0.9930
+GradientBoosting model saved to results/model_stats/2025-09-25_18-47-30_LinkedIn people profiles datasets - Clean_Original_label_data_GradientBoosting.pkl
+
+LogisticRegression Results:
+LogisticRegression CV ROC-AUC (3-fold): 0.9837
+              precision    recall  f1-score   support
+
+           0       0.98      0.87      0.92       480
+           1       0.79      0.96      0.87       240
+
+    accuracy                           0.90       720
+   macro avg       0.89      0.92      0.90       720
+weighted avg       0.92      0.90      0.90       720
+
+Saved prediction probabilities to results/model_stats/2025-09-25_18-47-30_LinkedIn people profiles datasets - Clean_Original_label_data_LogisticRegression_predictions.csv
+ROC-AUC: 0.9732
+LogisticRegression model saved to results/model_stats/2025-09-25_18-47-30_LinkedIn people profiles datasets - Clean_Original_label_data_LogisticRegression.pkl
+
+VotingClassifier Results:
+VotingClassifier CV ROC-AUC (3-fold): 0.9950
+              precision    recall  f1-score   support
+
+           0       0.99      0.96      0.97       480
+           1       0.92      0.97      0.95       240
+
+    accuracy                           0.97       720
+   macro avg       0.96      0.97      0.96       720
+weighted avg       0.97      0.97      0.97       720
+
+Saved prediction probabilities to results/model_stats/2025-09-25_18-47-30_LinkedIn people profiles datasets - Clean_Original_label_data_VotingClassifier_predictions.csv
+ROC-AUC: 0.9904
+VotingClassifier model saved to results/model_stats/2025-09-25_18-47-30_LinkedIn people profiles datasets - Clean_Original_label_data_VotingClassifier.pkl
+
+StackingClassifier Results:
+StackingClassifier CV ROC-AUC (3-fold): 0.9961
+              precision    recall  f1-score   support
+
+           0       0.98      0.96      0.97       480
+           1       0.92      0.97      0.94       240
+
+    accuracy                           0.96       720
+   macro avg       0.95      0.96      0.96       720
+weighted avg       0.96      0.96      0.96       720
+
+Saved prediction probabilities to results/model_stats/2025-09-25_18-47-30_LinkedIn people profiles datasets - Clean_Original_label_data_StackingClassifier_predictions.csv
+ROC-AUC: 0.9920
+StackingClassifier model saved to results/model_stats/2025-09-25_18-47-30_LinkedIn people profiles datasets - Clean_Original_label_data_StackingClassifier.pkl
