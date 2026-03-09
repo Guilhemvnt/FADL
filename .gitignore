@@ -1,7 +1,0 @@
-env
-__pycache__
-*.pkl
-venv
-results
-datasets
-proof
